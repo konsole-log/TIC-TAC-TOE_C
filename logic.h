@@ -1,7 +1,7 @@
 /*FILE THAT HANDLES THE CORE MECHANICS OF GAME*/
 #ifdef _WIN32
+#define window 0
 #include <Windows.h>
-#define windows 0
 #else
 #define unix 1
 #include <unistd.h>
@@ -23,13 +23,9 @@ void drawBoard(int n)
         if (unix)
         {
             system("clear");
+            break;
         }
-        else
-        {
-            system("cls");
-        }
-        break;
-    case false:
+        system("cls");
         break;
     }
 

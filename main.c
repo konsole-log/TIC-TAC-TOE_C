@@ -53,6 +53,7 @@ int main()
             break;
         default:
             drawBoard(true);
+
             printf("DRAWWW\n");
         }
         printf("\nDo you want to play another game?y[yes]/n[no]\n=>");
