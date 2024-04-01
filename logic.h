@@ -1,4 +1,11 @@
 /*FILE THAT HANDLES THE CORE MECHANICS OF GAME*/
+#ifdef _WIN32
+#include <Windows.h>
+#define windows 0
+#else
+#define unix 1
+#include <unistd.h>
+#endif
 #include "./constants.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +20,14 @@ void drawBoard(int n)
     switch (n)
     {
     case true:
-        system("clear");
+        if (unix)
+        {
+            system("clear");
+        }
+        else
+        {
+            system("cls");
+        }
         break;
     case false:
         break;
@@ -60,7 +74,7 @@ void drawBoard(int n)
     }
 }
 
-void inputPlayer(char turn, char player1[80], char player2[80])
+void inputPlayer(char turn, char *player1, char *player2)
 {
     int r, c;
     do
@@ -81,7 +95,7 @@ void inputPlayer(char turn, char player1[80], char player2[80])
         c--;
         if (board[r][c] != ' ')
         {
-            printf("there is player already\n\n");
+            printf("ERROR!!TRY AGAIN INPUTTING\n");
         }
         else
         {

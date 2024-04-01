@@ -1,7 +1,5 @@
 /*MAIN PROGRAM TO INCLUDE DIFFFERENT C PROGRAMS*/
-#include <unistd.h>
 #include "./logic.h"
-#include "./constants.h"
 
 int main()
 {
@@ -25,6 +23,7 @@ int main()
     // TODO:add computer and ask user to play with either computer or with another friend
     do
     {
+        resetBoard();
         int i = 0;
         winner = ' ';
         printf("Enter player1: ");
@@ -59,7 +58,8 @@ int main()
         printf("\nDo you want to play another game?y[yes]/n[no]\n=>");
         scanf(" %c", &ch);
         printf("\n-----------------------------------------------\n");
-        resetBoard();
+        sleep(1);
+        system("clear");
     } while (ch == 'y' || ch == 'Y');
     return 0;
 }
