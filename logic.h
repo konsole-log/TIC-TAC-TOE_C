@@ -9,23 +9,35 @@
 #include "./constants.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <ctype.h>
 
-// TODO:add a computer logic and add whether a winner is computer or player
 char board[3][3] = {"   ",
                     "   ",
                     "   "};
+// function prototypes
+void drawBoard(int);
+void inputPlayer(char, char *, char *);
+char checkWinner();
+int freespaces();
+void resetBoard();
+void pvp();
+void bot();
+void printWinner(char);
+void playerMove();
+
 void drawBoard(int n)
 {
     int i, j, k;
     switch (n)
     {
     case true:
-        if (unix)
+        if (!unix)
         {
-            system("clear");
+            system("cls");
             break;
         }
-        system("cls");
+        system("clear");
         break;
     }
 
@@ -159,5 +171,137 @@ void resetBoard()
         {
             board[i][j] = ' ';
         }
+    }
+}
+void pvp() // player v player
+{
+    char turn, winner, ch;
+
+    do
+    {
+        resetBoard();
+        int i = 0;
+        winner = ' ';
+        printf("Enter player1: ");
+        scanf(" %s", player1);
+        printf("Enter player2: ");
+        scanf(" %s", player2);
+        do
+        {
+            turn = i % 2 == 0 ? p1 : p2;
+            drawBoard(true);
+            inputPlayer(turn, player1, player2);
+            i++;
+            winner = checkWinner();
+            if (winner != ' ')
+            {
+                drawBoard(true);
+            }
+        } while (winner == ' ' && freespaces() != 0);
+        fflush(stdin);
+        drawBoard(true);
+        printWinner(winner);
+        printf("\nDo you want to play another game?y[yes]/n[no]\n=>");
+        scanf(" %c", &ch);
+        printf("\n-----------------------------------------------\n");
+        sleep(1);
+        system("clear");
+        ch = toupper(ch);
+    } while (ch == 'y');
+}
+
+void computerMove()
+{
+    srand(time(0));
+    int x, y;
+    if (freespaces() > 0)
+    {
+        do
+        {
+            x = rand() % 3;
+            y = rand() % 3;
+
+        } while (board[x][y] != ' ');
+        board[x][y] = p2;
+    }
+}
+void playerMove()
+{
+    int x;
+    int y;
+
+    do
+    {
+        printf("Enter row number(r): ");
+        scanf("%d", &x);
+        x--;
+        printf("Enter cols number(r): ");
+        scanf("%d", &y);
+        y--;
+
+        if (board[x][y] != ' ')
+        {
+            printf("Invalid move!\n");
+        }
+        else
+        {
+            board[x][y] = p1;
+            break;
+        }
+    } while (board[x][y] != ' ');
+}
+void bot()
+{
+    char winner = ' ';
+    char response = ' ';
+
+    do
+    {
+        winner = ' ';
+        response = ' ';
+        resetBoard();
+
+        while (winner == ' ' && freespaces() != 0)
+        {
+            drawBoard(true);
+
+            playerMove();
+            winner = checkWinner();
+            if (winner != ' ' || freespaces() == 0)
+            {
+                break;
+            }
+
+            computerMove();
+            winner = checkWinner();
+            if (winner != ' ' || freespaces() == 0)
+            {
+                break;
+            }
+        }
+
+        drawBoard(true);
+        printWinner(winner);
+
+        printf("\nWould you like to play again? (Y/N): ");
+        scanf(" %c", &response);
+        response = toupper(response);
+    } while (response == 'Y');
+
+    printf("Thanks for playing!");
+}
+
+void printWinner(char winner)
+{
+    switch (winner)
+    {
+    case p1:
+        printf("%s[X] is winner\n", player1);
+        break;
+    case p2:
+        printf("%s[O] is winner\n", player2);
+        break;
+    default:
+        printf("DRAWWW\n");
     }
 }
