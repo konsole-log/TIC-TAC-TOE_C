@@ -13,8 +13,9 @@ int main()
     printf("Here r specifies row number and c specifies cols number\nto enter your game values\n");
     printf("1. enter row number specified by the game\n");
     printf("2. enter the cols number\n");
+    printf("-------------------------------------------\n");
     printf("This game is single and multiplayer.press\n");
-    printf("1.player vs computer\n2.Player1 vs Player2");
+    printf("1.player vs computer\n2.Player1 vs Player2\n=>");
     scanf("%d", &mode);
     printf("--------------------------------------------------------------\n");
     sleep(3);

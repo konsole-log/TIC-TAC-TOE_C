@@ -15,6 +15,7 @@
 char board[3][3] = {"   ",
                     "   ",
                     "   "};
+
 // function prototypes
 void drawBoard(int);
 void inputPlayer(char, char *, char *);
@@ -56,7 +57,7 @@ void drawBoard(int n)
                     printf("   c%d", k + 1);
                 }
             }
-            printf("\n   -------------\n");
+            printf("\n   +-----------+\n");
         }
         printf("r%d |", i + 1);
         for (j = 0; j < 3; j++)
