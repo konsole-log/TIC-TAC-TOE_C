@@ -3,4 +3,4 @@
 #define false 0
 #define p1 'X'
 #define p2 'O'
-char player1[80], player2[80];
+ char player1[80], player2[80];
