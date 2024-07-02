@@ -1,17 +1,13 @@
 /*FILE THAT HANDLES THE CORE MECHANICS OF GAME*/
 #ifdef _WIN32
-#define window 0
 #include <Windows.h>
 #else
 #define unix 1
 #include <unistd.h>
 #endif
 #include "./constants.h"
-#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-char board[3][4] = {"   ", "   ", "   "};
 
 // function prototypes
 void drawBoard(int);
@@ -62,7 +58,7 @@ void drawBoard(int n) {
 }
 
 void inputPlayer(char turn, char *player1, char *player2) {
-  int r, c;
+  int r, c, n;
   do {
     if (turn == p1) {
       printf("%s[X] turn\n", player1);
